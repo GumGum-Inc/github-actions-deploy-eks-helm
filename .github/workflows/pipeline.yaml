@@ -1,0 +1,14 @@
+name: pipeline
+permissions:
+  id-token: write
+  contents: read
+on:
+  push
+jobs:
+  docker-build:
+    uses: GumGum-Inc/reusable-workflow-ci-docker-build/.github/workflows/ci-docker-build.yaml@v0.0.1
+    with:
+      trivy_output_code: '0'
+      email_addresses: ops@gumgum.com
+    secrets:
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
